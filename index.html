@@ -3,20 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ぱるの便利ツールポータル | paru-hub.com</title>
+    <title>ぱるのオタク向け便利ツール開発場 | paru-hub.com</title>
     <style>
-        body { font-family: sans-serif; margin: 20px; background-color: #f9f9f9; text-align: center; }
-        .container { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        a { display: block; margin: 20px 0; color: #0066cc; text-decoration: none; font-size: 1.2em; border: 1px solid #ccc; padding: 15px; border-radius: 5px; transition: background-color 0.2s;}
-        a:hover { background-color: #e6f2ff; }
+        /* おもちゃ箱＆レトロポップなネオブルータリズムデザイン */
+        :root {
+            --bg-blue: #2a5caa;
+            --box-yellow: #f4d03f;
+            --box-red: #ef473a;
+            --box-green: #27ae60;
+            --box-white: #ffffff;
+            --border-color: #111111;
+        }
+        body {
+            font-family: 'Hiragino Maru Gothic ProN', 'Rounded M+ 1c', sans-serif;
+            background-color: var(--bg-blue);
+            color: var(--border-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            background-color: var(--box-white);
+            padding: 20px;
+            border: 4px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 6px 6px 0px var(--border-color);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 3px solid var(--border-color);
+            border-radius: 8px;
+            width: 80%;
+            max-width: 300px;
+        }
+        .tag-btn {
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 3px solid var(--border-color);
+            border-radius: 20px;
+            background-color: var(--box-white);
+            box-shadow: 3px 3px 0px var(--border-color);
+            transition: all 0.1s;
+        }
+        .tag-btn:active, .tag-btn.active {
+            transform: translate(3px, 3px);
+            box-shadow: 0px 0px 0px var(--border-color);
+            background-color: var(--box-yellow);
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .tool-card {
+            display: block;
+            text-decoration: none;
+            color: var(--border-color);
+            background-color: var(--box-white);
+            border: 4px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 6px 6px 0px var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .tool-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px var(--border-color);
+        }
+        /* バナー風の配色バリエーション */
+        .tool-card.color-red { background-color: var(--box-red); color: white; }
+        .tool-card.color-yellow { background-color: var(--box-yellow); }
+        .tool-card.color-green { background-color: var(--box-green); color: white; }
+        
+        .tool-title { font-size: 1.4em; font-weight: bold; margin-bottom: 10px; }
+        .tool-desc { font-size: 1em; margin-bottom: 15px; }
+        .tags { display: flex; gap: 5px; flex-wrap: wrap; }
+        .tag {
+            font-size: 0.8em;
+            background: var(--box-white);
+            color: var(--border-color);
+            border: 2px solid var(--border-color);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <div class="header">
         <h1>🛠️ ぱるのオタク向け便利ツール開発場</h1>
         <p>ここに作った神ツールたちを並べていくよ！</p>
-        <a href="https://tora-fee-sim.vercel.app/" target="_blank">とらのあな保管料シミュレーター</a>
-        <a href="https://yume-shima.vercel.app/" target="_blank">ゆめ島マップメーカー（簡易設計図）</a>
+        
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="ツールを検索...">
+            <button class="tag-btn active" onclick="filterTools('all')">すべて</button>
+            <button class="tag-btn" onclick="filterTools('comic')">同人誌</button>
+            <button class="tag-btn" onclick="filterTools('game')">ゲーム</button>
+        </div>
     </div>
+
+    <div class="grid-container" id="toolGrid">
+        <a href="https://tora-fee-sim.vercel.app/" target="_blank" class="tool-card color-yellow" data-tags="comic,calculator" data-title="とらのあな保管料シミュレーター">
+            <div class="tool-title">とらのあな保管料シミュレーター</div>
+            <div class="tool-desc">在庫数と期間から保管料をサクッと計算！</div>
+            <div class="tags">
+                <span class="tag">同人誌</span>
+                <span class="tag">計算ツール</span>
+            </div>
+        </a>
+
+        <a href="https://yume-shima.vercel.app/" target="_blank" class="tool-card color-green" data-tags="game,map" data-title="ゆめ島マップメーカー">
+            <div class="tool-title">ゆめ島マップメーカー（簡易設計図）</div>
+            <div class="tool-desc">島のレイアウトをブラウザで簡単作成！</div>
+            <div class="tags">
+                <span class="tag">ゲーム</span>
+                <span class="tag">マップ</span>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        function filterTools(tag) {
+            // ボタンのアクティブ状態を変更
+            document.querySelectorAll('.tag-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.tool-card');
+            const searchWord = document.getElementById('searchInput').value.toLowerCase();
+
+            cards.forEach(card => {
+                const tags = card.getAttribute('data-tags');
+                const title = card.getAttribute('data-title').toLowerCase();
+                
+                const matchTag = (tag === 'all' || tags.includes(tag));
+                const matchSearch = title.includes(searchWord);
+
+                if (matchTag && matchSearch) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // 検索ボックスの入力イベント
+        document.getElementById('searchInput').addEventListener('input', () => {
+            const activeTagBtn = document.querySelector('.tag-btn.active');
+            const activeTag = activeTagBtn ? activeTagBtn.getAttribute('onclick').match(/'([^']+)'/)[1] : 'all';
+            filterTools(activeTag);
+        });
+    </script>
 </body>
 </html>
