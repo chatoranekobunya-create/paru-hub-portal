@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ぱるのオタク向け便利ツール開発場 | paru-hub.com</title>
+    <title>ぱるの便利ツール開発場 | paru-hub.com</title>
     <style>
         :root {
             --bg-blue: #2a5caa;
@@ -16,6 +17,7 @@
             --box-white: #ffffff;
             --border-color: #111111;
         }
+
         body {
             font-family: 'Hiragino Maru Gothic ProN', 'Rounded M+ 1c', sans-serif;
             background-color: var(--bg-blue);
@@ -23,6 +25,7 @@
             margin: 0;
             padding: 20px;
         }
+
         .header {
             text-align: center;
             background-color: var(--box-white);
@@ -35,6 +38,7 @@
             margin-left: auto;
             margin-right: auto;
         }
+
         .controls {
             display: flex;
             flex-wrap: wrap;
@@ -42,6 +46,7 @@
             justify-content: center;
             margin-top: 15px;
         }
+
         input[type="text"] {
             padding: 10px;
             font-size: 16px;
@@ -50,6 +55,7 @@
             width: 80%;
             max-width: 300px;
         }
+
         .tag-btn {
             padding: 8px 15px;
             font-size: 14px;
@@ -61,11 +67,14 @@
             box-shadow: 3px 3px 0px var(--border-color);
             transition: all 0.1s;
         }
-        .tag-btn:active, .tag-btn.active {
+
+        .tag-btn:active,
+        .tag-btn.active {
             transform: translate(3px, 3px);
             box-shadow: 0px 0px 0px var(--border-color);
             background-color: var(--box-yellow);
         }
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -73,6 +82,7 @@
             max-width: 1000px;
             margin: 0 auto;
         }
+
         .tool-card {
             display: block;
             text-decoration: none;
@@ -84,20 +94,57 @@
             box-shadow: 6px 6px 0px var(--border-color);
             transition: transform 0.2s, box-shadow 0.2s;
         }
+
         .tool-card:hover {
             transform: translate(-2px, -2px);
             box-shadow: 8px 8px 0px var(--border-color);
         }
-        .tool-card.color-red { background-color: var(--box-red); color: white; }
-        .tool-card.color-yellow { background-color: var(--box-yellow); }
-        .tool-card.color-green { background-color: var(--box-green); color: white; }
-        .tool-card.color-pink { background-color: var(--box-pink); }
-        .tool-card.color-purple { background-color: var(--box-purple); color: white; }
-        .tool-card.color-cyan { background-color: var(--box-cyan); }
-        
-        .tool-title { font-size: 1.3em; font-weight: bold; margin-bottom: 10px; }
-        .tool-desc { font-size: 0.95em; margin-bottom: 15px; line-height: 1.4; }
-        .tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+        .tool-card.color-red {
+            background-color: var(--box-red);
+            color: white;
+        }
+
+        .tool-card.color-yellow {
+            background-color: var(--box-yellow);
+        }
+
+        .tool-card.color-green {
+            background-color: var(--box-green);
+            color: white;
+        }
+
+        .tool-card.color-pink {
+            background-color: var(--box-pink);
+        }
+
+        .tool-card.color-purple {
+            background-color: var(--box-purple);
+            color: white;
+        }
+
+        .tool-card.color-cyan {
+            background-color: var(--box-cyan);
+        }
+
+        .tool-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .tool-desc {
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
         .tag {
             font-size: 0.8em;
             background: var(--box-white);
@@ -107,15 +154,20 @@
             border-radius: 10px;
             font-weight: bold;
         }
-        .hidden { display: none !important; }
+
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="header">
-        <h1>🛠️ ぱるのオタク向け便利ツール開発場</h1>
+        <h1>🛠️ ぱるの便利ツール開発場</h1>
+        <p style="font-size: 0.75em; color: #888; margin: 4px 0 10px;">Amazonのアソシエイトとして、ぱるは適格販売により収入を得ています。</p>
         <p>ここに作った神ツールたちを並べていくよ！</p>
-        
+
         <div class="controls">
             <input type="text" id="searchInput" placeholder="ツールを検索...">
             <button class="tag-btn active" onclick="filterTools('all')">すべて</button>
@@ -127,43 +179,50 @@
     </div>
 
     <div class="grid-container" id="toolGrid">
-        <a href="https://tora-fee-sim.vercel.app/" target="_blank" class="tool-card color-yellow" data-tags="comic" data-title="とらのあな保管料シミュレーター">
+        <a href="https://tora-fee-sim.vercel.app/" target="_blank" class="tool-card color-yellow" data-tags="comic"
+            data-title="とらのあな保管料シミュレーター">
             <div class="tool-title">とらのあな保管料シミュレーター</div>
             <div class="tool-desc">在庫数と期間から保管料をサクッと計算！</div>
             <div class="tags"><span class="tag">同人誌</span></div>
         </a>
 
-        <a href="https://yume-shima.vercel.app/" target="_blank" class="tool-card color-green" data-tags="game" data-title="ゆめ島マップメーカー">
+        <a href="https://yume-shima.vercel.app/" target="_blank" class="tool-card color-green" data-tags="game"
+            data-title="ゆめ島マップメーカー">
             <div class="tool-title">ゆめ島マップメーカー（簡易設計図）</div>
             <div class="tool-desc">島のレイアウトをブラウザで簡単作成！</div>
             <div class="tags"><span class="tag">ゲーム</span></div>
         </a>
 
-        <a href="https://genkai-meshi.vercel.app/" target="_blank" class="tool-card color-red" data-tags="joke" data-title="限界飯ジェネレーター">
+        <a href="https://genkai-meshi.vercel.app/" target="_blank" class="tool-card color-red" data-tags="joke"
+            data-title="限界飯ジェネレーター">
             <div class="tool-title">限界飯ジェネレーター</div>
             <div class="tool-desc">原稿修羅場中に食べる飯ガチャ！</div>
             <div class="tags"><span class="tag">ネタ系</span></div>
         </a>
 
-        <a href="https://cp-gacha.vercel.app/" target="_blank" class="tool-card color-pink" data-tags="gacha" data-title="CPガチャ">
+        <a href="https://cp-gacha.vercel.app/" target="_blank" class="tool-card color-pink" data-tags="gacha"
+            data-title="CPガチャ">
             <div class="tool-title">CPガチャ</div>
             <div class="tool-desc">ランダムでカップリングのお題やシチュエーションを排出！</div>
             <div class="tags"><span class="tag">ガチャ/診断</span></div>
         </a>
 
-        <a href="https://nui-gacha.vercel.app/" target="_blank" class="tool-card color-cyan" data-tags="gacha" data-title="ぬいガチャ">
+        <a href="https://nui-gacha.vercel.app/" target="_blank" class="tool-card color-cyan" data-tags="gacha"
+            data-title="ぬいガチャ">
             <div class="tool-title">推しぬいお出かけガチャ</div>
             <div class="tool-desc">撮影シチュエーションにマンネリを感じたら</div>
             <div class="tags"><span class="tag">ガチャ/診断</span></div>
         </a>
 
-        <a href="https://toku-mokugyo.vercel.app/" target="_blank" class="tool-card color-purple" data-tags="joke" data-title="徳木魚（バーチャル木魚）">
+        <a href="https://toku-mokugyo.vercel.app/" target="_blank" class="tool-card color-purple" data-tags="joke"
+            data-title="徳木魚（バーチャル木魚）">
             <div class="tool-title">徳木魚（バーチャル木魚）</div>
             <div class="tool-desc">原稿が進まない時に無心で押すやつ</div>
             <div class="tags"><span class="tag">ネタ系</span></div>
         </a>
 
-        <a href="https://yamazaki-diagnosis.vercel.app/" target="_blank" class="tool-card color-white" data-tags="gacha" data-title="山崎診断">
+        <a href="https://yamazaki-diagnosis.vercel.app/" target="_blank" class="tool-card color-white" data-tags="gacha"
+            data-title="山崎診断">
             <div class="tool-title">オタクのための山崎実業製品の診断</div>
             <div class="tool-desc">あなたにどんな収納が向いているのかベストなものを診断！</div>
             <div class="tags"><span class="tag">ガチャ/診断</span></div>
@@ -181,7 +240,7 @@
             cards.forEach(card => {
                 const tags = card.getAttribute('data-tags');
                 const title = card.getAttribute('data-title').toLowerCase();
-                
+
                 const matchTag = (tag === 'all' || tags.includes(tag));
                 const matchSearch = title.includes(searchWord);
 
@@ -200,4 +259,5 @@
         });
     </script>
 </body>
+
 </html>
